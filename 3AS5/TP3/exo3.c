@@ -6,6 +6,7 @@ double const PESANTEUR = 9.81;
 double const PI = 3.14159265359;
 
 // Site pour vérifier les valeurs numériques : https://www.edu.gov.mb.ca/m12/frpub/ped/sn/phys/dmo_12/word/reg_1_ann_31.docx
+// Site source des formules : https://www.wikiwand.com/fr/Trajectoire_d%27un_projectile + notes personnelles
 // NB : Impossible de choisir un angle de 90° pour ce résultat, cas limite des formules utilisées.
 
 void choix_donnees(double *h0, double *v0, double *alpha)
