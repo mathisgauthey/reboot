@@ -30,30 +30,33 @@ void selectionSort(int tab[], int N)
 }
 
 void insertionSort(int tab[], int N)
-
+// The idea is that we're going through the array and we're inserting the current element in the right place in the sorted part of the array. (left)
 {
-    int i, j, temp;
-    for (i = 1; i < N; i++)
+    int i, j;               // Loop indexes
+    int temp;               // Temp element used for swapping
+    for (i = 1; i < N; i++) // We loop through the array, starting from the second element
     {
-        temp = tab[i];
-        j = i - 1;
-        while (j >= 0 && tab[j] > temp)
+        temp = tab[i];                  // We store the current element
+        j = i - 1;                      // We set the j index to the previous element
+        while (j >= 0 && tab[j] > temp) // While we're not at the beginning of the array and the previous element is bigger than the current element
         {
-            tab[j + 1] = tab[j];
-            j = j - 1;
+            tab[j + 1] = tab[j]; // We move the previous element to the right
+            j = j - 1;           // We move the j index to the left
         }
-        tab[j + 1] = temp;
+        tab[j + 1] = temp; // We insert the current element in the right place
     }
 }
 
 void bubbleSort(int tab[], int N)
+// The idea is to loop through the array and swap the current element with the next one if it's bigger.
 {
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; i++) // We loop through the array
     {
-        for (int j = 0; j < N - i - 1; j++)
+        for (int j = 0; j < N - i - 1; j++) // We loop through the array, minus the elements that are already sorted
         {
-            if (tab[j] > tab[j + 1])
+            if (tab[j] > tab[j + 1]) // If the current element is bigger than the next one
             {
+                // We swap the two elements
                 int temp = tab[j];
                 tab[j] = tab[j + 1];
                 tab[j + 1] = temp;
