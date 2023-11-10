@@ -67,36 +67,45 @@ void bubbleSort(int tab[], int N)
 
 void merge(int arr[], int left, int mid, int right)
 {
-    int i, j, k;
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    int i, j, k;             // Loop indexes
+    int n1 = mid - left + 1; // Number of elements in the first subarray
+    int n2 = right - mid;    // Number of elements in the second subarray
 
-    int L[n1], R[n2];
+    int L[n1], R[n2]; // We create two temporary arrays
+
+    // We fill the temporary arrays
 
     for (i = 0; i < n1; i++)
+    {
         L[i] = arr[left + i];
-    for (j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
+    }
 
-    i = 0;
-    j = 0;
-    k = left;
+    for (j = 0; j < n2; j++)
+    {
+        R[j] = arr[mid + 1 + j];
+    }
+
+    // We merge the two temporary arrays back into arr[left..right]
+    i = 0;    // Initial index of first subarray
+    j = 0;    // Initial index of second subarray
+    k = left; // Initial index of merged subarray
 
     while (i < n1 && j < n2)
     {
-        if (L[i] <= R[j])
+        if (L[i] <= R[j]) // If the element in the first subarray is smaller than the element in the second subarray
         {
-            arr[k] = L[i];
-            i++;
+            arr[k] = L[i]; // We put the element in the merged array
+            i++;           // Don't forget to increment the index
         }
-        else
+        else // Else we put the element of the second subarray in the merged array
         {
-            arr[k] = R[j];
-            j++;
+            arr[k] = R[j]; // We put the element in the merged array
+            j++;           // Don't forget to increment the index
         }
         k++;
     }
 
+    // We copy the remaining elements of L[], if there are any
     while (i < n1)
     {
         arr[k] = L[i];
@@ -104,6 +113,7 @@ void merge(int arr[], int left, int mid, int right)
         k++;
     }
 
+    // We copy the remaining elements of R[], if there are any
     while (j < n2)
     {
         arr[k] = R[j];
@@ -113,14 +123,18 @@ void merge(int arr[], int left, int mid, int right)
 }
 
 void mergeSort(int arr[], int left, int right)
+// The idea is to split the array in two parts, sort them and merge them.
+// Superb explanation : https://www.youtube.com/watch?v=IJDJ0kBx2LM&feature=youtu.be
 {
     if (left < right)
     {
-        int mid = left + (right - left) / 2;
+        int mid = left + (right - left) / 2; // We find the middle of the array
 
+        // We sort the first and second halves
         mergeSort(arr, left, mid);
         mergeSort(arr, mid + 1, right);
 
+        // We merge two subarrays
         merge(arr, left, mid, right);
     }
 }
@@ -128,7 +142,7 @@ void mergeSort(int arr[], int left, int right)
 int main(int argc, char *argv[])
 {
     // Variables declarations
-    int N = 100000;
+    int N = 1000;
 
     // Selection Sort
     int selection_tab[N];
@@ -145,7 +159,7 @@ int main(int argc, char *argv[])
     printf("Ordered table : %s \n", getName(selection_tab));
     printTab(selection_tab, N);
 
-    // Selection Sort
+    // Insertion Sort
     int insertion_tab[N];
     clock_t insertion_start, insertion_end;
     // Tabs generation
