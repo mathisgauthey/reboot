@@ -32,6 +32,19 @@ public class ArrayUtils {
     }
 
     /**
+     * Method for swapping elements x and y
+     *
+     * @param arr an array of int
+     * @param x   index of first element to swap
+     * @param y   index of second element to swap
+     */
+    static void swap(int[] arr, int x, int y) {
+        int temp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = temp;
+    }
+
+    /**
      * Verify if an array has been correctly sorted.
      *
      * @param array an array of supposedly sorted int.
@@ -195,5 +208,57 @@ public class ArrayUtils {
             // We need to decrement left because temp array might be a smaller part inside
             // the input array and the indexes would not correspond.
         }
+    }
+
+    /**
+     * Sort an array using the quick-sort algorithm.
+     *
+     * @param arr   an array
+     * @param left  the first index
+     * @param right the last index
+     */
+    public static void quick_sortSort(int[] arr, int left, int right) {
+        if (left < right) { // Base case
+            // Partition array around pivot.
+            // Lower values to the left of the pivot.
+            // Higher values to the right of the pivot.
+            int array_partition = partition(arr, left, right);
+
+            // Repeat the algorithm on the left part after the pivot
+            quick_sortSort(arr, left, array_partition - 1);
+            // Repeat the algorithm on the right part after the pivot.
+            quick_sortSort(arr, array_partition + 1, right);
+        }
+    }
+
+    /**
+     * Partition an array part.
+     * Takes a pivot (last index), put values around accordingly, repeat.
+     * Lower values to the left of the pivot.
+     * Higher values to the right of the pivot.
+     *
+     * @param arr   an array
+     * @param left  the first index
+     * @param right the last index
+     * @return index of pivot position
+     */
+    public static int partition(int[] arr, int left, int right) {
+
+        // Choose the pivot to be the last element of the array
+        int pivot = arr[right];
+        // Index of smaller element, starts below the array.
+        int i = (left - 1);
+
+        for (int j = left; j < right; j++) { // We go through the array except the pivot.
+            if (arr[j] <= pivot) { // If we find a lower value
+
+                i++; // We increment the index of the smaller element
+                swap(arr, i, j); // We swap it with the current element
+            }
+        }
+        // In the end, we put the pivot to the right position at the right of the last
+        // swapped element.
+        swap(arr, (i + 1), right);
+        return (i + 1);
     }
 }

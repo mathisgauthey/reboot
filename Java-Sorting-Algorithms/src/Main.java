@@ -41,10 +41,24 @@ public class Main {
         ArrayUtils.printArray(merge_array, "merge_array");
         ArrayUtils.verifySorted(merge_array);
 
+        // quick-sort Sort
+        int quick_sort_array[] = new int[] { 1, 8, 3, 9, 4, 5, 7 };
+        ArrayUtils.printArray(quick_sort_array, "quick_sort_array");
+        Instant quick_sort_start = Instant.now();
+        ArrayUtils.quick_sortSort(quick_sort_array, 0, quick_sort_array.length - 1);
+        Instant quick_sort_end = Instant.now();
+        ArrayUtils.printArray(quick_sort_array, "quick_sort_array");
+        ArrayUtils.verifySorted(quick_sort_array);
+
         // Timers
-        System.out.println("selectionSort execution time : " + Duration.between(selection_start, selection_end));
-        System.out.println("insertionSort execution time : " + Duration.between(insertion_start, insertion_end));
-        System.out.println("bubbleSort execution time : " + Duration.between(bubble_start, bubble_end));
-        System.out.println("mergeSort execution time : " + Duration.between(merge_start, merge_end));
+        System.out.println("selectionSort execution time : " +
+                Duration.between(selection_start, selection_end));
+        System.out.println("insertionSort execution time : " +
+                Duration.between(insertion_start, insertion_end));
+        System.out.println("bubbleSort execution time : " +
+                Duration.between(bubble_start, bubble_end));
+        System.out.println("mergeSort execution time : " +
+                Duration.between(merge_start, merge_end));
+        System.out.println("quick_sortSort execution time : " + Duration.between(quick_sort_start, quick_sort_end));
     }
 }
