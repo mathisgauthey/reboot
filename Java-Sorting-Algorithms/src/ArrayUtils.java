@@ -46,7 +46,8 @@ public class ArrayUtils {
             }
         }
         if (sorted)
-            System.out.println("The array is sorted.");
+            System.out.println(
+                    "The array is sorted.");
         else
             System.err.println("ERROR, ARRAY NOT SORTED");
     }
@@ -105,15 +106,17 @@ public class ArrayUtils {
      * Sort an array using the bubble sorting method.
      * Basically, we start from the left and compare neighboring values.
      * The goal is to push the bigger values to the right.
+     * First part of the array to be sorted : The right.
      *
      * @param arr
      */
     public static void bubbleSort(int[] arr) {
-        int size = arr.length;
-        int i, j;
-        int temp;
+        int size = arr.length; // Loop limit
+        int i, j; // Loop indexes
+        int temp; // Temp variable for swapping
         for (i = 0; i < size; i++) {
             for (j = 0; j < size - i - 1; j++) {
+                // If a value to the right is lower, we swap. -> Bigger values go to the right.
                 if (arr[j] > arr[j + 1]) {
                     temp = arr[j];
                     arr[j] = arr[j + 1];
@@ -123,4 +126,74 @@ public class ArrayUtils {
         }
     }
 
+    /**
+     * Sort an array using the merge sorting method (with recursion).
+     * We take an array and consider smaller and smaller part of it.
+     * When we're the smallest, we sort them using the merge function.
+     *
+     * @param arr   an array of int
+     * @param left  the first index
+     * @param right the last index
+     */
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) { // If the considered part has more than 1 element
+            int mid = left + (right - left) / 2; // Calculate mid-point
+
+            // We use recursion to recursively split the array
+            mergeSort(arr, left, mid); // Left part of the array
+            mergeSort(arr, mid + 1, right); // Right part of the array
+
+            // When we are done, we merge the result back in order.
+            merge(arr, left, mid, right);
+        }
+    }
+
+    /**
+     * Merging results of shrunk array in order.
+     *
+     * @param arr   an array of int
+     * @param left  first index
+     * @param mid   mid index
+     * @param right right index
+     */
+    public static void merge(int[] arr, int left, int mid, int right) {
+        // Build temp array to avoid modifying the original contents
+        int[] temp = new int[right - left + 1];
+
+        int i = left;
+        int j = mid + 1;
+        int k = 0;
+
+        // While both sub-arrays have values, then try and merge them in sorted order.
+        while (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+                temp[k] = arr[i];
+                i++;
+                k++;
+            } else {
+                temp[k] = arr[j];
+                j++;
+                k++;
+            }
+        }
+
+        // We then add the remaining values if there's any left.
+        while (i <= mid) {
+            temp[k] = arr[i];
+            i++;
+            k++;
+        }
+        while (j <= right) {
+            temp[k] = arr[j];
+            j++;
+            k++;
+        }
+
+        // And we replace the values of the original array
+        for (i = left; i <= right; i++) {
+            arr[i] = temp[i - left];
+            // We need to decrement left because temp array might be a smaller part inside
+            // the input array and the indexes would not correspond.
+        }
+    }
 }

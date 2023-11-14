@@ -3,7 +3,7 @@ import java.time.Duration;
 
 public class Main {
     public static void main(String[] args) {
-        int size = 5;
+        int size = 10000;
 
         // Selection Sort
         int selection_array[] = ArrayUtils.generateRandomArray(size);
@@ -32,9 +32,19 @@ public class Main {
         ArrayUtils.printArray(bubble_array, "bubble_array");
         ArrayUtils.verifySorted(bubble_array);
 
+        // Merge Sort
+        int merge_array[] = new int[] { 4, 1, 3, 2, 0, -1, 7, 10, 9, 20 };
+        ArrayUtils.printArray(merge_array, "merge_array");
+        Instant merge_start = Instant.now();
+        ArrayUtils.mergeSort(merge_array, 0, merge_array.length - 1);
+        Instant merge_end = Instant.now();
+        ArrayUtils.printArray(merge_array, "merge_array");
+        ArrayUtils.verifySorted(merge_array);
+
         // Timers
         System.out.println("selectionSort execution time : " + Duration.between(selection_start, selection_end));
         System.out.println("insertionSort execution time : " + Duration.between(insertion_start, insertion_end));
         System.out.println("bubbleSort execution time : " + Duration.between(bubble_start, bubble_end));
+        System.out.println("mergeSort execution time : " + Duration.between(merge_start, merge_end));
     }
 }
