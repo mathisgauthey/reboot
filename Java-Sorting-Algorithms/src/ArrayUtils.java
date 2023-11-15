@@ -250,7 +250,7 @@ public class ArrayUtils {
         int i = (left - 1);
 
         for (int j = left; j < right; j++) { // We go through the array except the pivot.
-            if (arr[j] <= pivot) { // If we find a lower value
+            if (arr[j] < pivot) { // If we find a lower value
 
                 i++; // We increment the index of the smaller element
                 swap(arr, i, j); // We swap it with the current element
@@ -260,5 +260,67 @@ public class ArrayUtils {
         // swapped element.
         swap(arr, (i + 1), right);
         return (i + 1);
+    }
+
+    /**
+     * Sort an array using the heap-sort.
+     * Basically sorting a binary tree using a max heap and removing element
+     * one by one.
+     *
+     * @param arr
+     */
+    public static void heap_sortSort(int[] arr) {
+        int size = arr.length;
+        int x = size / 2 - 1; // Last non-leaf node
+        // Parent of i'th node is (i-1)/2 => ((n-1)-1)/2 = N/2-1
+        // We take the parent of the last leaf, meaning (N-1)'th node
+        int y = size - 1; // Last element of the array
+
+        // We create a max heap of our data starting from the last element
+        // that have at least one leaf children. And we go up.
+        while (x >= 0) {
+            heapify(arr, size, x);
+            x--;
+        }
+
+        // Swap the root with the last node, and then heapify once again
+        while (y >= 0) {
+            swap(arr, 0, y);
+            // When we heapify again, we do it with one less value
+            // That's because the last one was just sorted
+            heapify(arr, y, 0);
+            y--;
+        }
+    }
+
+    /**
+     * Build a max heap out of a binary tree.
+     *
+     * @param arr  an array
+     * @param size the size of the array
+     * @param i    the index of the parent node
+     */
+    public static void heapify(int[] arr, int size, int i) {
+        int largest = i; // Selected node index
+        int left = i * 2 + 1; // Index of left child of i
+        int right = left + 1; // Index of right child of i
+
+        // If there is still child values AND
+        // If the left child is bigger, swap the largest value;
+        if (left < size && arr[left] > arr[largest]) {
+            largest = left;
+        }
+        // If there is still child values AND
+        // If the right child is bigger, swap the largest value
+        if (right < size && arr[right] > arr[largest]) {
+            largest = right;
+        }
+
+        // If there was a bigger child down the line
+        if (largest != i) {
+            swap(arr, i, largest); // Swap the two values
+            // Recursively continue with the largest element
+            heapify(arr, size, largest);
+        }
     }
 }
