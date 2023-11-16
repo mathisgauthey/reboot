@@ -95,5 +95,6 @@ class BST {
         tree.arrayToTree(array);
         tree.updateArrayFromTree(tree.root, array, 0);
         ArrayUtils.printArray(array, "Sorted Array");
+
     }
 }

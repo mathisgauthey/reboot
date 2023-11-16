@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Graph",
+            "request": "launch",
+            "mainClass": "Graph",
+            "projectName": "reboot_79cf818c"
+        },
+        {
+            "type": "java",
             "name": "BinarySearch",
             "request": "launch",
             "mainClass": "BinarySearch",
