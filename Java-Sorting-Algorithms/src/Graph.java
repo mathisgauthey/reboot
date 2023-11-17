@@ -114,22 +114,25 @@ public class Graph {
 
         // Add the start node to the queue and the visited list
         queue.add(startNode);
-        visited.add(startNode);
 
         // While the queue is not empty...
         while (!queue.isEmpty()) {
+
             // Get the first node in the queue
             Node currentNode = queue.poll();
-            // Print it's value
-            System.out.print(currentNode.value + " ");
 
+            if (!visited.contains(currentNode)) {
+                // Print it's value
+                System.out.print(currentNode.value + " ");
+                // And add it to the visited list
+                visited.add(currentNode);
+            }
             // For each neighbor of the current node...
             for (Node neighbor : adjList.get(currentNode)) {
                 // If the neighbor has not been visited yet...
                 if (!visited.contains(neighbor)) {
                     // Add it to the queue and the visited list
                     queue.add(neighbor);
-                    visited.add(neighbor);
                 }
             }
         }
